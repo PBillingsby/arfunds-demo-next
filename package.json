@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -11,7 +11,17 @@
   "dependencies": {
     "next": "12.1.6",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "@chakra-ui/icons": "^2.0.2",
+    "@chakra-ui/react": "^2.2.1",
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "arfunds": "^1.1.15",
+    "browserify": "^17.0.0",
+    "framer-motion": "4.1.17",
+    "fs": "^0.0.1-security",
+    "path-browserify": "^1.0.1",
+    "tmp": "^0.2.1"
   },
   "devDependencies": {
     "@types/node": "18.0.0",
