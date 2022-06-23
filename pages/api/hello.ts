@@ -1,18 +1,34 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
-import fs from 'fs'
-import path from 'path'
+import { promises as fs } from "fs";
+import path from "path";
+import formidable, { File } from 'formidable';
 
 type Data = {
-  name: string
+  status: number
+  data: any
 }
 
-export default function handler(
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>,
-  fs: any,
-  path: any
+  res: NextApiResponse<Data>
 ) {
-  debugger
-  res.status(200).json({ name: 'John Doe' })
+  if (req.method === "POST") {
+    try {
+      const data = await new Promise(function (resolve, reject) {
+        const form = new formidable.IncomingForm();
+        form.parse(req, function (err, fields, files) {
+          if (err) return reject(err);
+          resolve({ fields, files });
+        });
+      });
+    } catch (e) {
+      res.status(400).send({ status: 400, data: 'none' });
+    }
+  }
 }
+

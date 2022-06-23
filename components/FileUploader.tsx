@@ -5,7 +5,7 @@
 import { useState, useEffect } from 'react'
 import Arfund from "arfunds";
 import {
-  Input, Center, VStack, Text, FormLabel,
+  Center, VStack, Text, FormLabel,
   Button
 } from '@chakra-ui/react'
 
@@ -26,39 +26,49 @@ export default function FileUploader({ arweave }: any) {
   }
 
   // const checkPath = async (path) => { return fsPromises.stat(path).then(_ => true).catch(_ => false) }
+  let formData = new FormData();
   const [readArr, setReadArr] = useState<any[]>([])
   const handleFiles = async (e: any) => {
-    const files = Array.from(e.target.files)
+    e.preventDefault()
+    const files = e.target[0].files
     try {
-      files.map((file: any) => {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-          if (reader.result) {
-            setReadArr(oldState => [...oldState, Buffer.from(reader.result as string)])
-          }
-        };
-        reader.readAsArrayBuffer(file);
-        const objectUrl = URL.createObjectURL(file)
-
-        // const mobj = tweet.extended_entities.media[i]
-        // const url = mobj.media_url
-        // if ((mobj.type === "video" || mobj.type === "animated_gif") && mobj ?.video_info ?.variants) {
-        //   const variants = mobj ?.video_info ?.variants.sort((a, b) => ((a.bitrate ?? 1000) > (b.bitrate ?? 1000) ? -1 : 1))
-        //                 await processMediaURL(variants[0].url, mediaDir, i)
-        // } else {
-        //   await processMediaURL(url, mediaDir, i)
-        // }
+      Array.from(files).map((file: any, i: number) => {
+        console.log("appending:", file)
+        formData.append('file', file)
       })
+      console.log(files)
+      // const reader = new FileReader();
+      // reader.onloadend = () => {
+      //   if (reader.result) {
+      //     setReadArr(oldState => [...oldState, Buffer.from(reader.result as string)])
+      //   }
+      // };
+      // reader.readAsArrayBuffer(file);
+      // const objectUrl = URL.createObjectURL(file)
 
+      // const mobj = tweet.extended_entities.media[i]
+      // const url = mobj.media_url
+      // if ((mobj.type === "video" || mobj.type === "animated_gif") && mobj ?.video_info ?.variants) {
+      //   const variants = mobj ?.video_info ?.variants.sort((a, b) => ((a.bitrate ?? 1000) > (b.bitrate ?? 1000) ? -1 : 1))
+      //                 await processMediaURL(variants[0].url, mediaDir, i)
+      // } else {
+      //   await processMediaURL(url, mediaDir, i)
+      // }
+      // }
     } catch (error) {
       console.log(error)
     }
+
+    handleArchive()
   }
   const handleArchive = async () => {
-    console.log(readArr)
     await fetch('/api/hello', {
       method: 'POST',
-      body: JSON.stringify(readArr)
+      headers: {
+        Accept: "application/json",
+        "content-type": "multipart/form-data"
+      },
+      body: JSON.stringify(formData)
     }).then(obj => {
       console.log(obj)
     });
@@ -69,8 +79,10 @@ export default function FileUploader({ arweave }: any) {
         <FormLabel fontSize='4xl'>Archive</FormLabel>
         <VStack border='1px solid black' borderRadius='md' p={4}>
           <Center>
-            <Input type='file' name='file' multiple onChange={(e) => handleFiles(e)} />
-            <Button size='sm' w='10vw' fontSize='md' onClick={handleArchive} bg='#A0CDF6' ml={4} border={'1.5px solid'} borderColor='black' _hover={{ bg: '#eee', borderColor: 'gray.300', border: '1.5px solid' }}>Archive</Button>
+            <form onSubmit={handleFiles}>
+              <input type='file' name='file' multiple />
+              <Button size='sm' w='10vw' fontSize='md' type='submit' bg='#A0CDF6' ml={4} border={'1.5px solid'} borderColor='black' _hover={{ bg: '#eee', borderColor: 'gray.300', border: '1.5px solid' }}>Archive</Button>
+            </form>
           </Center>
         </VStack>
         <FormLabel fontSize='4xl'>Mint</FormLabel>
