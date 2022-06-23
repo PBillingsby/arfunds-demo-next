@@ -1,7 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import formidable from 'formidable';
 
-
 type Data = {
   status: number
   data: any
@@ -18,7 +17,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const path = require("path")
   const form = formidable({ multiples: true });
   await new Promise(() => {
     if (req.url === '/api/hello' && req.method === 'POST') {
@@ -28,9 +26,9 @@ export default async function handler(
           return res.end(String(err));
         }
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        initializeBundlr()
-        // res.end(JSON.stringify({ files }, null, 2));
-        res.status(200)
+        // initializeBundlr() @TODO implement bundlr functionatlity once instance is passed
+        res.end(JSON.stringify({ files }, null, 2));
+        // res.status(200)
       });
     }
     // res.writeHead(200, { 'Content-Type': 'text/html' });
