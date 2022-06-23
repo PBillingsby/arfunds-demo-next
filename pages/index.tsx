@@ -23,10 +23,10 @@ const Home: NextPage = () => {
   return (
     <Box pt={6}>
       <Center>
-        <Stack direction='row'>
-          <Text fontSize='lg'>Create Pool</Text>
+        <Stack direction='row' p={2}>
+          <Text fontSize='2xl'>Create Pool</Text>
           <Switch size='lg' onChange={() => setIsArchive(!isArchive)} />
-          <Text fontSize='lg'>Archive and Mint</Text>
+          <Text fontSize='2xl'>Archive and Mint</Text>
         </Stack>
       </Center>
       <Image style={{ position: 'fixed', bottom: '10px' }} width='6rem' height='6rem' src='https://arweave.net/JBDB4gRkUFhf-l_1FctwKkyB79xp6fBKxIm1uhV-vqo' />

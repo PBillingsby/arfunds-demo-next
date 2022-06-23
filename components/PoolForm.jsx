@@ -78,7 +78,7 @@ export default function PoolForm({ arweave }) {
   return (
     <>
       <Center pt={4}>
-        <FormLabel fontSize='4xl'>Mint</FormLabel>
+        <FormLabel fontSize='4xl'>Create Pool</FormLabel>
       </Center>
       <Center maxH={'75vh'}>
         {loading ?
