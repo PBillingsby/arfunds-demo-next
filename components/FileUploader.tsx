@@ -21,8 +21,9 @@ export default function FileUploader({ arweave }: any) {
       timeout: 20000,
       logging: false,
     });
-    // const bundlr = new WebBundlr('https://node1.bundlr.network', 'arweave', provider)
-    // await bundlr.ready()
+    const bundlr = new WebBundlr('https://node1.bundlr.network', 'arweave', "use_wallet")
+    await bundlr.ready()
+    debugger
     // console.log(bundlr)
     // setBundlrInst(bundlr);
   }
@@ -52,12 +53,12 @@ export default function FileUploader({ arweave }: any) {
             </form>
           </Center>
         </VStack>
-        <FormLabel fontSize='4xl'>Mint</FormLabel> */}
+        <FormLabel fontSize='4xl'>Mint</FormLabel>
         <VStack border='1px solid black' borderRadius='md' p={4}>
           <Text fontWeight='semibold' fontSize='sm' px={4}>Pool creators can mint their rewards to a random contributor</Text>
           <FormLabel>Artifact ID</FormLabel>
-          <Input onChange={(e: string) => setMintContract(e.target.value)} border={'1.5px solid'} borderColor='black' size='sm' w={80} type='text' /> */}
-          <Button boxShadow='md' size='sm' w='10vw' fontSize='md' onClick={mint} bg='#A0CDF6' ml={4} border={'1.5px solid'} borderColor='black' _hover={{ bg: '#eee', borderColor: 'gray.300', border: '1.5px solid' }}>Mint</Button> */}
+          <Input onChange={(e: React.ChangeEvent<HTMLInputElement>) => setMintContract(e.target.value)} border={'1.5px solid'} borderColor='black' size='sm' w={80} type='text' />
+          <Button boxShadow='md' size='sm' w='10vw' fontSize='md' onClick={mint} bg='#A0CDF6' ml={4} border={'1.5px solid'} borderColor='black' _hover={{ bg: '#eee', borderColor: 'gray.300', border: '1.5px solid' }}>Mint</Button>
         </VStack>
         <Button size='lg' boxShadow='md' bg='#A0CDF6' borderColor='black' border='1px solid black' onClick={() => initializeBundlr()}>
           <VStack>
