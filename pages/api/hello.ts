@@ -1,7 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { promises as fs } from "fs";
-import path from "path";
-import formidable, { File } from 'formidable';
+import formidable from 'formidable';
 
 type Data = {
   status: number
@@ -11,24 +9,33 @@ type Data = {
 export const config = {
   api: {
     bodyParser: false,
+    externalResolver: true
   },
 };
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  if (req.method === "POST") {
-    try {
-      const data = await new Promise(function (resolve, reject) {
-        const form = new formidable.IncomingForm();
-        form.parse(req, function (err, fields, files) {
-          if (err) return reject(err);
-          resolve({ fields, files });
-        });
+  const form = formidable({ multiples: true });
+  await new Promise(() => {
+    if (req.url === '/api/hello' && req.method === 'POST') {
+      form.parse(req, function (err, fields, files) {
+        if (err) {
+          res.writeHead(err.httpCode || 400, { 'Content-Type': 'text/plain' });
+          return res.end(String(err));
+        }
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        // initializeBundlr() @TODO implement bundlr functionatlity once instance is passed
+        res.end(JSON.stringify({ files }, null, 2));
+        // res.status(200)
       });
-    } catch (e) {
-      res.status(400).send({ status: 400, data: 'none' });
     }
-  }
+    // res.writeHead(200, { 'Content-Type': 'text/html' });
+  })
+}
+
+const initializeBundlr = async () => {
+  
 }
 

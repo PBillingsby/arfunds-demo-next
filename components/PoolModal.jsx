@@ -76,7 +76,6 @@ export default function PoolModal(props) {
             </div>
           </ModalBody>
         </ModalContent>
-        }
       </Modal>
       }
     </>
