@@ -49,7 +49,7 @@ export default function FileUploader({ arweave }: any) {
           <Center>
             <form action="/api/hello" encType="multipart/form-data" method="post">
               <input type='file' name='file' multiple />
-              <Button boxShadow='md' fontSize='xl' size='xl' w='10vw' fontSize='md' type='submit' bg='#A0CDF6' ml={4} border={'1.5px solid'} borderColor='black' _hover={{ bg: '#eee', borderColor: 'gray.300', border: '1.5px solid' }}>Archive</Button>
+              <Button boxShadow='md' fontSize='xl' size='xl' w='10vw' type='submit' bg='#A0CDF6' ml={4} border={'1.5px solid'} borderColor='black' _hover={{ bg: '#eee', borderColor: 'gray.300', border: '1.5px solid' }}>Archive</Button>
             </form>
           </Center>
         </VStack>
