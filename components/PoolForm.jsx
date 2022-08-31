@@ -3,6 +3,7 @@ import Arfund, { createPool } from "arfunds";
 
 import PoolModal from './PoolModal'
 import {
+  Box,
   Tooltip,
   FormControl,
   FormLabel,
@@ -102,7 +103,9 @@ export default function PoolForm({ arweave }) {
                   </Tooltip>
                 </HStack>
                 <Textarea name='description' borderColor='black' onChange={(e) => handleChange(e)} w='30rem' h='27vh' />
-                {noDescription && <FormErrorMessage>Description is required.</FormErrorMessage>}
+                <Box>
+                  {noDescription && <FormErrorMessage>Description is required.</FormErrorMessage>}
+                </Box>
               </FormControl>
             </VStack>
             <VStack px={16} w={'xl'}>
@@ -120,7 +123,9 @@ export default function PoolForm({ arweave }) {
                   </Tooltip>
                 </HStack>
                 <Input type='text' borderColor='black' name='wallet' onChange={(e) => handleChange(e)} />
-                {noWallet && <FormErrorMessage>Arwallet address is required.</FormErrorMessage>}
+                <Box>
+                  {noWallet && <FormErrorMessage>Arwallet address is required.</FormErrorMessage>}
+                </Box>
               </FormControl>
               <FormControl>
                 <FormLabel fontSize='xl'>Operator Info</FormLabel>
@@ -134,7 +139,7 @@ export default function PoolForm({ arweave }) {
           </>
         }
       </Center>
-      <VStack px={12}>
+      <VStack px={12} mt={8}>
         <Button mt={8} onClick={(e) => handlePoolCreate(e)} px={8} mx={12} size='auto' fontSize='3rem' bg='#A0CDF6' border='1.5px solid' borderColor='black' _hover={{ bg: '#94bce0' }}>
           <Text as="h2" fontWeight="lighter">{loading ? "Creating...." : "Create Pool"}</Text>
         </Button>
