@@ -54,11 +54,15 @@ export default function PoolModal(props) {
                 (<VStack>
                   <HStack>
                     {poolId && <Text><Text as={'strong'}>Pool Id:</Text> {addressParser(poolId)}</Text>}
-                    <CopyIcon onClick={() => navigator.clipboard.writeText(poolId)} />
+                    <button>
+                      <CopyIcon onClick={() => navigator.clipboard.writeText(poolId)} />
+                    </button>
                   </HStack>
                   <HStack>
                     {poolObject.wallet && <Text><Text as={'strong'}>Contract Owner:</Text> {addressParser(poolObject.wallet)}</Text>}
-                    <CopyIcon onClick={() => navigator.clipboard.writeText(poolObject.owner)} />
+                    <button>
+                      <CopyIcon onClick={() => navigator.clipboard.writeText(poolObject.owner)} />
+                    </button>
                   </HStack>
                   {poolObject.operatorInfo && <Text><Text as={'strong'}>Owner Info:</Text> {poolObject.operatorInfo}</Text>}
                   {poolObject.website && <Text><Text as={'strong'}>Website:</Text> <Link href={poolObject.website}>{poolObject.website}</Link></Text>}

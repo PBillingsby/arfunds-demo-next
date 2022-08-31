@@ -77,10 +77,7 @@ export default function PoolForm({ arweave }) {
 
   return (
     <>
-      <Center pt={4}>
-        <FormLabel fontSize='4xl'>Create Pool</FormLabel>
-      </Center>
-      <Center maxH={'75vh'}>
+      <Center maxH={'75vh'} pt={28}>
         {loading ?
           <Center h={'410px'}>
             <VStack>
@@ -89,14 +86,14 @@ export default function PoolForm({ arweave }) {
           </Center>
           :
           <>
-            <VStack px={16} pt={2}>
+            <VStack px={16}>
               <FormControl>
                 <FormLabel fontSize='xl'>Pool Title</FormLabel>
                 <Input type='text' name='title' borderColor='black' onChange={(e) => handleChange(e)} />
               </FormControl>
               <FormControl isInvalid={noDescription}>
-                <HStack pt={1.5}>
-                  <FormLabel fontSize='xl'>Description</FormLabel>
+                <HStack>
+                  <FormLabel fontSize='xl' pt={1.5}>Description</FormLabel>
                   <Tooltip
                     label={<DescriptionLabel />}
                     fontSize='md'
@@ -104,7 +101,7 @@ export default function PoolForm({ arweave }) {
                     <QuestionOutlineIcon color='blue' />
                   </Tooltip>
                 </HStack>
-                <Textarea name='description' borderColor='black' onChange={(e) => handleChange(e)} w='30rem' h='32vh' />
+                <Textarea name='description' borderColor='black' onChange={(e) => handleChange(e)} w='30rem' h='27vh' />
                 {noDescription && <FormErrorMessage>Description is required.</FormErrorMessage>}
               </FormControl>
             </VStack>
@@ -139,7 +136,7 @@ export default function PoolForm({ arweave }) {
       </Center>
       <VStack px={12}>
         <Button mt={8} onClick={(e) => handlePoolCreate(e)} px={8} mx={12} size='auto' fontSize='3rem' bg='#A0CDF6' border='1.5px solid' borderColor='black' _hover={{ bg: '#94bce0' }}>
-          {loading ? "Creating...." : "Create Pool"}
+          <Text as="h2" fontWeight="lighter">{loading ? "Creating...." : "Create Pool"}</Text>
         </Button>
       </VStack>
       {/* This needs to be replaced with REAL value. This is currently first index of ALL contracts */}
@@ -151,10 +148,8 @@ export default function PoolForm({ arweave }) {
 const DescriptionLabel = () => {
   return (
     <div>
-      <p>This description should include:</p>
-      <p>• Here</p>
-      <p>• Goes</p>
-      <p>• What is needed for description</p>
+      <Text fontSize='xs'>• Add detailed description of pool</Text>
+      <Text fontSize='xs'>• Add incentive structure for contributors</Text>
     </div >
   )
 }
